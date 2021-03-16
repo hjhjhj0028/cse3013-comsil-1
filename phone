@@ -1,0 +1,13 @@
+if [ $# -eq 0 ]; then
+    echo "Usage: phone searchfor [...searchfor]"
+    echo "(You didn't tell me what you want to search for.)"
+    exit 0
+fi
+
+str="egrep $1 data"
+for i in "$@"; do
+    str="$str|egrep $i"
+done
+
+eval "$str|awk -f display.awk"
+exit 0
